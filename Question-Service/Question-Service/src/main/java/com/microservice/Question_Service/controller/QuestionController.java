@@ -48,8 +48,8 @@ public class QuestionController {
     }
 
     @GetMapping("getQuestionsForQuiz")
-    public ResponseEntity<List<Integer>> getQuestionsForQuiz(@RequestBody String category, @RequestBody int noOfQuesions) {
-        return questionService.QuestionsForQuiz(category,noOfQuesions);
+    public ResponseEntity<List<Integer>> getQuestionsForQuiz(@RequestParam String category, @RequestParam int noOfQuestions) {
+        return questionService.QuestionsForQuiz(category,noOfQuestions);
     }
     @PostMapping("getQuestionsFromId")
     public ResponseEntity<List<QuestionDto>> getQuestionsFromId(@RequestBody List<Integer>questionsId) {

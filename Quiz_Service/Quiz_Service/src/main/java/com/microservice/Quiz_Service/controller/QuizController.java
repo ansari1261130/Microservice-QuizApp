@@ -16,13 +16,13 @@ import java.util.List;
 public class QuizController {
 
     private final QuizService quizService;
-    @RequestMapping("/create")
+    @PostMapping("/create")
     public ResponseEntity<String> generateQuiz(@RequestBody QuizDto quizDto) {
         return quizService.createQuiz(quizDto.getCategoryName(),quizDto.getNumQuestions(),quizDto.getTitle());
     }
 
-    @RequestMapping("/getQuestions/{id}")
-    public ResponseEntity<List<QuestionDto>> generateQuestionsFromId(@PathVariable Integer id) {
+    @PostMapping("/getQuestions/{id}")
+    public ResponseEntity<List<QuestionDto>> generateQuestionsFromId(@PathVariable Long id) {
         return quizService.generateQuestionsFromId(id);
     }
 

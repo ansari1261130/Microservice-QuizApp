@@ -37,16 +37,20 @@ public class QuizService {
         return null;
     }
 
-    public ResponseEntity<List<QuestionDto>> generateQuestionsFromId(Integer id) {
+    public ResponseEntity<List<QuestionDto>> generateQuestionsFromId(Long id) {
         try {
-            Optional<Quiz> quiz = quizRepository.findById(Long.valueOf(id));
-            List<Integer> questionIds = quiz.get().getQuestionId();
+            Optional<Quiz> quizOptional = quizRepository.findById(id);
+            if (quizOptional.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            List<Integer> questionIds = quizOptional.get().getQuestionId();
             List<QuestionDto> questionDtos = quizInterface.getQuestionsFromId(questionIds).getBody();
             return ResponseEntity.ok(questionDtos);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 
     public ResponseEntity<Integer> calculateScore(Integer id, List<ResponseDto> responseDto) {
         try {
